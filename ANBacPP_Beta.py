@@ -69,18 +69,17 @@ def get_predictions(df, id_col):
   results['pIC50 against DNA Gyrase'] = GYMpred
   return results
 
-def download_link(object_to_download, download_filename, download_link_text):
-	if isinstance(object_to_download, pd.DataFrame):
-		object_to_download = object_to_download.to_csv(index=False)
-	b64 = base64.b64encode(object_to_download.encode()).decode()
-	return f'<a href="data:text/plain;base64,{object_to_download}" download="{download_filename}">{download_link_text}</a>'
+def get_table_download_link(df, file_name, hyperlink):
+	csv = df.to_csv(index=False)
+	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+	href = f"<a href='data:file/csv;base64,{b64} download={file_name}'>{hyperlink} </a>"
+	return(href)
 
 
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-example_ = example.to_csv(index=False)
-st.sidebar.markdown(download_link(example_, 'example_csv_file.csv', 'Example CSV File'))
+st.sidebar.markdown(get_table_download_link(example, 'example_csv_file.csv', 'Example CSV File'))
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
@@ -119,5 +118,5 @@ st.write("""
 """)
 st.write(DF)
 
-st.markdown(download_link(DF, 'prediction_results.csv', 'Download Results as CSV File'))
+st.markdown(get_table_download_link(DF, 'prediction_results.csv', 'Download Results as CSV File'))
 
