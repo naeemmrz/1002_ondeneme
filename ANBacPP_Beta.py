@@ -19,9 +19,6 @@ Developed by Naeem Abdul Ghafoor¹ & Ömür Baysal²
 
 User Input:
 """)
-st.sidebar.markdown("""
-[Example CSV input file](https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv)
-""")
 
 # BACKEND FUNCTIONS
 
@@ -72,17 +69,20 @@ def get_predictions(df, id_col):
   results['pIC50 against DNA Gyrase'] = GYMpred
   return results
 
-def get_table_download_link(df):
+def get_table_download_link(df, name):
     """Generates a link allowing the data in a given panda dataframe to be downloaded
     in:  dataframe
     out: href string
     """
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a href="data:file/csv;base64,{b64}" download="Prediction_Results.csv">Download Results as CSV </a>'
+    href = f'<a href="data:file/csv;base64,{b64}" download="Prediction_Results.csv"> name </a>'
     return(href)	
 
 # FRONTEND INPUTS
+
+example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
+st.sidebar.markdown(get_table_download_link(DF, 'Example CSV File'), unsafe_allow_html=True)
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
@@ -121,5 +121,5 @@ st.write("""
 """)
 st.write(DF)
 
-st.markdown(get_table_download_link(DF), unsafe_allow_html=True)
+st.markdown(get_table_download_link(DF, 'Download Results as CSV'), unsafe_allow_html=True)
 
