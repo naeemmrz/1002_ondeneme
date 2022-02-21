@@ -90,14 +90,14 @@ else:
     st.write(""" **Awaiting CSV file to be uploaded**.""")
     st.stop()
 
-id_col = st.sidebar.text_input('ID column header in the CSV file', 'SID/ID/etc')
+id_col = st.sidebar.text_input('ID column header in the CSV file', 'SID/CID?')
 if id_col in input_df.columns:
     id_column = id_col
 else:
     st.write(""" **Please enter the correct header name for the ID column (case senstive)**.""")
     st.stop()
 
-smiles_col = st.sidebar.text_input('SMILES column header in the CSV', 'smiles/etc')
+smiles_col = st.sidebar.text_input('SMILES column header in the CSV', 'smiles/smi?')
 if smiles_col in input_df.columns:
     smiles_column = smiles_col
 else:
