@@ -69,17 +69,19 @@ def get_predictions(df, id_col):
   results['pIC50 against DNA Gyrase'] = GYMpred
   return results
 
-def get_table_download_link(df, file_name, hyperlink):
-	csv = df.to_csv(index=False)
-	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-	href = f'<a href="data:file/csv;base64,{b64} download={file_name}"> {hyperlink} </a>'
-	return(href)
+def convert_df(df):
+	return df.to_csv().encode('utf-8')
 
 
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-st.sidebar.markdown(get_table_download_link(example, 'example_csv_file.csv', 'Example CSV File'), unsafe_allow_html=True)
+st.sidebar.st.download_button(
+   "Press to Download",
+   convert_df(example),
+   "example_csv_file.csv",
+   "Example CSV File",
+   key='download-csv')
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
