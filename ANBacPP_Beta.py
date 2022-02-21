@@ -70,7 +70,7 @@ def get_predictions(df, id_col):
   return results
 
 def get_table_download_link(df, file_name, hyperlink):
-	csv = df.to_csv(index=False).encode("utf-8")
+	csv = df.to_csv(index=False)
 	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
 	href = f'<a href="data:file/csv;base64,{b64} download={file_name}"> {hyperlink} </a>'
 	return(href)
@@ -79,7 +79,7 @@ def get_table_download_link(df, file_name, hyperlink):
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-st.sidebar.markdown(get_table_download_link(example, 'example_csv_file.csv', 'Example CSV File'))
+st.sidebar.markdown(get_table_download_link(example, 'example_csv_file.csv', 'Example CSV File'), unsafe_allow_html=True)
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
@@ -118,5 +118,5 @@ st.write("""
 """)
 st.write(DF)
 
-st.markdown(get_table_download_link(DF, 'prediction_results.csv', 'Download Results as CSV File'))
+st.markdown(get_table_download_link(DF, 'prediction_results.csv', 'Download Results as CSV File'), unsafe_allow_html=True)
 
