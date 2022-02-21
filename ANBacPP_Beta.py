@@ -82,7 +82,7 @@ def get_table_download_link(df, name):
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-st.sidebar.markdown(get_table_download_link(DF, 'Example CSV File'), unsafe_allow_html=True)
+st.sidebar.markdown(get_table_download_link(example, 'Example CSV File'), unsafe_allow_html=True)
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
