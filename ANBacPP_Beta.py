@@ -72,7 +72,7 @@ def get_predictions(df, id_col):
 def get_table_download_link(df, file_name, hyperlink):
 	csv = df.to_csv(index=False)
 	b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-	href = f"<a href='data:file/csv;base64,{b64} download={file_name}'>{hyperlink} </a>"
+	href = f'<a href="data:file/csv;base64,{b64} download={file_name}"> {hyperlink} </a>'
 	return(href)
 
 
