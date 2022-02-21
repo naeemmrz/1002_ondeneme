@@ -14,7 +14,7 @@ from padelpy import padeldescriptor
 image = Image.open('logo.png')
 st.image(image, use_column_width=True)
 st.write("""
-Beta version, currently under development 
+Beta version, currently under development\n
 	~Naeem Abdul Ghafoor¹ & Ömür Baysal¹
 \n
 ###### ¹Department of Molecular Biology and Genetics, Mugla Sitki Kocman University, 48000 Turkey.
