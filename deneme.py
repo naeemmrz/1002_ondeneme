@@ -22,7 +22,7 @@ Developed by Naeem Abdul Ghafoor¹ & Ömür Baysal²
 User Input:
 """)
 st.sidebar.markdown("""
-[Example CSV input file](https://raw.githubusercontent.com/naeemmrz/ANBacPP.py/main/sample_input.csv)
+[Example CSV input file](https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv)
 """)
 
 # BACKEND FUNCTIONS
