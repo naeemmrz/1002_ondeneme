@@ -14,7 +14,7 @@ from padelpy import padeldescriptor
 image = Image.open('logo.png')
 st.image(image, use_column_width=True)
 st.write("""
-Developed by Naeem Abdul Ghafoor¹ & Ömür Baysal²
+Developed by Naeem Abdul Ghafoor¹ & Ömür Baysal¹
 \n
 
 User Input:
