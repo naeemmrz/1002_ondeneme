@@ -70,7 +70,7 @@ def get_predictions(df, id_col):
   return results
 
 def download_link(object_to_download, download_filename, download_link_text):
-	if isinstance(object_to_download,pd.DataFrame):
+	if isinstance(object_to_download, pd.DataFrame):
 		object_to_download = object_to_download.to_csv(index=False)
 	b64 = base64.b64encode(object_to_download.encode()).decode()
 	return f'<a href="data:text/plain;base64,{object_to_download}" download="{download_filename}">{download_link_text}</a>'
@@ -79,7 +79,8 @@ def download_link(object_to_download, download_filename, download_link_text):
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-st.sidebar.markdown(download_link(example, 'example_csv_file.csv', 'Example CSV File'))
+example_ = example.to_csv(index=False)
+st.sidebar.markdown(download_link(example_, 'example_csv_file.csv', 'Example CSV File'))
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
