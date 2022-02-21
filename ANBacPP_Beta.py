@@ -69,30 +69,21 @@ def get_predictions(df, id_col):
   results['pIC50 against DNA Gyrase'] = GYMpred
   return results
 
-def get_table_download_link(df):
-    """Generates a link allowing the data in a given panda dataframe to be downloaded
-    in:  dataframe
-    out: href string
-    """
-    csv = df.to_csv(index=False)
-    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a href="data:file/csv;base64,{b64}" download="Prediction_Results.csv"> Download Results as CSV </a>'
-    return(href)	
+def download_link(object_to_download, download_filename, download_link_text):
+	
+    if isinstance(object_to_download,pd.DataFrame):
+        object_to_download = object_to_download.to_csv(index=False)
 
-def get_exmple(df):
-    """Generates a link allowing the data in a given panda dataframe to be downloaded
-    in:  dataframe
-    out: href string
-    """
-    csv = df.to_csv(index=False)
-    b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a href="data:file/csv;base64,{b64}" download="Prediction_Results.csv"> Example CSV File </a>'
-    return(href)
+    # some strings <-> bytes conversions necessary here
+    b64 = base64.b64encode(object_to_download.encode()).decode()
+
+    return f'<a href="data:file/txt;base64,{b64}" download="{download_filename}">{download_link_text}</a>'
+
 
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-st.sidebar.markdown(get_exmple(example), unsafe_allow_html=True)
+st.sidebar.markdown(download_link(example, 'example_csv_file.csv', 'Example CSV File'))
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
 if uploaded_file is not None:
@@ -131,5 +122,5 @@ st.write("""
 """)
 st.write(DF)
 
-st.markdown(get_table_download_link(DF), unsafe_allow_html=True)
+st.markdown(download_link(DF, 'prediction_results.csv', 'Download Results as CSV File'))
 
