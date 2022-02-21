@@ -16,9 +16,7 @@ st.image(image, use_column_width=True)
 st.write("""
 Developed by Naeem Abdul Ghafoor¹ & Ömür Baysal²
 \n
-###### ¹Department of Molecular Biology and Genetics, Faculty of Science, Mugla Sitki Kocman University, 48000 Turkey.\n 
-[For More Details, Please Read](https://www.mu.edu.tr/)
-\n
+
 User Input:
 """)
 st.sidebar.markdown("""
