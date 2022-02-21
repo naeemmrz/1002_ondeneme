@@ -72,11 +72,10 @@ def get_predictions(df, id_col):
 def convert_df(df):
 	return df.to_csv().encode('utf-8')
 
-
 # FRONTEND INPUTS
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
-st.sidebar.st.download_button(
+st.sidebar.download_button(
    "Press to Download",
    convert_df(example),
    "example_csv_file.csv",
