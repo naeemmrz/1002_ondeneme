@@ -76,10 +76,10 @@ def convert_df(df):
 
 example = pd.read_csv('https://raw.githubusercontent.com/naeemmrz/ANBacPP/main/sample_input.csv')
 st.sidebar.download_button(
-   "Press to Download",
+   "Example CSV File",
    convert_df(example),
    "example_csv_file.csv",
-   "Example CSV File",
+   "text/csv",
    key='download-csv')
 
 uploaded_file = st.sidebar.file_uploader("Upload your input CSV file", type=["csv"])
@@ -119,5 +119,9 @@ st.write("""
 """)
 st.write(DF)
 
-st.markdown(get_table_download_link(DF, 'prediction_results.csv', 'Download Results as CSV File'), unsafe_allow_html=True)
-
+st.sidebar.download_button(
+   "Press To Download Results",
+   convert_df(DF),
+   "results.csv",
+   "text/csv",
+   key='download-csv')
